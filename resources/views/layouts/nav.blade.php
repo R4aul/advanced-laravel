@@ -21,21 +21,45 @@
                     Contacto
                 </a>
 
-                <a href="{{ route('admin.login.form') }}"
-                   class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                    Docentes / Admin
-                </a>
+                @guest('web')
+                    @guest('student')
+                        <a href="{{ route('admin.login.form') }}"
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            Docentes / Admin
+                        </a>
 
-                <a href="{{ route('student.login.form') }}"
-                   class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
-                    Estudiantes
-                </a>
+                        <a href="{{ route('student.login.form') }}"
+                            class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                            Estudiantes
+                        </a>
+                    @endguest
+                @endguest
+                @auth
+                    <form action="{{ route('admin.logout') }}" method="post">
+                        @csrf
+                        <a href="{{ route('admin.logout') }}"
+                            class="block bg-blue-600 text-white text-center px-4 py-2 rounded-lg"
+                            onclick="event.preventDefault(); this.closest('form').submit();">
+                            Cerrar sesion
+                        </a>
+                    </form>
+                @endauth
+                @auth('student')
+                    <form action="{{ route('student.logout') }}" method="post">
+                        @csrf
+                        <a href="{{ route('student.logout') }}"
+                            class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+                            onclick="event.preventDefault(); this.closest('form').submit();">
+                            Cerrar sesion
+                        </a>
+                    </form>
+                @endauth
             </div>
 
             {{-- Mobile button --}}
             <div class="flex items-center md:hidden">
                 <button id="mobile-menu-button"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none">
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none">
                     ☰
                 </button>
             </div>
@@ -54,15 +78,40 @@
             Contacto
         </a>
 
-        <a href="{{ route('admin.login.form') }}"
-           class="block bg-blue-600 text-white text-center px-4 py-2 rounded-lg">
-            Docentes / Admin
-        </a>
+        @guest('web')
+            @guest('student')
 
-        <a href="{{ route('student.login.form') }}"
-           class="block bg-green-600 text-white text-center px-4 py-2 rounded-lg">
-            Estudiantes
-        </a>
+                <a href="{{ route('admin.login.form') }}"
+                    class="block bg-blue-600 text-white text-center px-4 py-2 rounded-lg">
+                    Docentes / Admin
+                </a>
+
+                <a href="{{ route('student.login.form') }}"
+                    class="block bg-green-600 text-white text-center px-4 py-2 rounded-lg">
+                    Estudiantes
+                </a>
+            @endguest
+        @endguest
+
+        @auth
+            <form action="{{ route('admin.logout') }}" method="post">
+                @csrf
+                <a href="{{ route('admin.logout') }}" class="block bg-blue-600 text-white text-center px-4 py-2 rounded-lg"
+                    onclick="event.preventDefault(); this.closest('form').submit();">
+                    Cerrar sesion
+                </a>
+            </form>
+        @endauth
+        @auth('student')
+            <form action="{{ route('student.logout') }}" method="post">
+                @csrf
+                <a href="{{ route('student.logout') }}"
+                    class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+                    onclick="event.preventDefault(); this.closest('form').submit();">
+                    Cerrar sesion
+                </a>
+            </form>
+        @endauth
     </div>
 </nav>
 

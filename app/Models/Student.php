@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticable;
 
-class Student extends Model
+class Student extends Authenticable
 {
     protected $fillable = [
         'name',
@@ -13,4 +14,13 @@ class Student extends Model
         'password',
         'status',
     ];
+
+    protected $hidden = [
+        'password'
+    ];
+
+    public function getAuthIdentifierName()
+    {
+        return 'matricula';
+    }
 }

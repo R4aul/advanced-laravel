@@ -4,13 +4,16 @@
 @section('heading', 'Acceso Estudiantes')
 
 @section('content')
-    <form method="POST" action="" class="space-y-4">
+    <form method="POST" action="{{route('student.login')}}" class="space-y-4">
         @csrf
 
         <div>
             <label class="block text-sm font-medium">Matrícula</label>
             <input type="text" name="matricula" required
                 class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring focus:ring-green-200">
+            @error('matricula')
+                <p class="text-red-700">{{$message}}</p>
+            @enderror
         </div>
 
         <div>
