@@ -4,13 +4,16 @@
 @section('heading', 'Acceso Administradores / Docentes')
 
 @section('content')
-    <form method="POST" action="" class="space-y-4">
+    <form method="POST" action="{{route('admin.login')}}" class="space-y-4">
         @csrf
 
         <div>
             <label class="block text-sm font-medium">Correo electrónico</label>
             <input type="email" name="email" required
                 class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring focus:ring-blue-200">
+            @error('email')
+                <p class="text-red-700">{{$message}}</p>
+            @enderror
         </div>
 
         <div>
