@@ -23,12 +23,18 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
     
-        Student::create([
+        $student = Student::create([
             'matricula'=>'2130605',
             'name'=>'Raul Damian Rafael',
             'email'=>'raul@gmail.com',
             'password'=>bcrypt('password'),
             'status'=>true
+        ]);
+
+        $student->profile()->create([
+            'phone'=>'7721192098',
+            'address'=>'calle san pedro num 21',
+            'birth_date'=>'2025-12-30 '
         ]);
     }
 }

@@ -10,6 +10,6 @@ class StudentProfile extends Model
         'student_id',
         'phone',
         'address',
-        'birht_date'
+        'birth_date'
     ];
 }
