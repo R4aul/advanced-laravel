@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthAdminController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::get('/login', fn () => view('auth.admin-login'))->name('admin.login.form');
 
@@ -19,5 +20,11 @@ Route::middleware('auth')->group(function() {
             'students'=>'id'
         ])
         ->except(['show','destroy'])->names('admin.students');
+
+    Route::resource('/users', UserController::class)
+        ->parameters([
+            'users'=>'id'
+        ])
+        ->except(['show', 'destroy'])->names('admin.users');
 
 });
